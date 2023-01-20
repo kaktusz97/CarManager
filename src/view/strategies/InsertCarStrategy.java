@@ -1,9 +1,9 @@
-package views.strategies;
+package view.strategies;
 
 import logic.Car;
 import logic.CarHandler;
-import views.CarEventListener;
-import views.CarHandlingStrategy;
+import view.CarEventListener;
+import view.CarHandlingStrategy;
 
 public class InsertCarStrategy implements CarHandlingStrategy {
     

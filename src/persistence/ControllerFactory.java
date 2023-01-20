@@ -1,10 +1,10 @@
 package persistence;
 
-import utils.CreatorType;
+import utils.ControllerType;
 
 public class ControllerFactory {
 
-    public static Controller createController(CreatorType type) {
+    public static Controller createController(ControllerType type) {
         switch (type) {
             default:
                 return new CarController();

@@ -1,9 +1,11 @@
 package logic;
 
+import utils.ParamValidator;
+
 public class Car implements Comparable<Car> {
 
     private long id;
-    private String lincencePlate;
+    private String licencePlate;
     private String brand;
     private String model;
     private int engineSize;
@@ -11,10 +13,10 @@ public class Car implements Comparable<Car> {
     public Car() {
     }
 
-    public Car(long id, String lincencePlate, String brand, String model,
+    public Car(long id, String licencePlate, String brand, String model,
             int engineSize) {
         this.id = id;
-        this.lincencePlate = lincencePlate;
+        this.licencePlate = licencePlate;
         this.brand = brand;
         this.model = model;
         this.engineSize = engineSize;
@@ -24,16 +26,20 @@ public class Car implements Comparable<Car> {
         return id;
     }
 
-    public void setId(long id) {
+    public final void setId(long id) {
         this.id = id;
     }
 
-    public String getLincencePlate() {
-        return lincencePlate;
+    public String getLicencePlate() {
+        return licencePlate;
     }
 
-    public void setLincencePlate(String lincencePlate) {
-        this.lincencePlate = lincencePlate;
+    public void setLicencePlate(String licencePlate) {
+        if (ParamValidator.checkLincencePlate(licencePlate)) {
+            this.licencePlate = licencePlate;
+        } else {
+            throw new IllegalArgumentException("wrong licencePlate");
+        }
     }
 
     public String getBrand() {
@@ -41,7 +47,12 @@ public class Car implements Comparable<Car> {
     }
 
     public void setBrand(String brand) {
-        this.brand = brand;
+        if (ParamValidator.isBetween(brand.length(), 3, 15)
+                && ParamValidator.isLettersOnly(brand)) {
+            this.brand = brand;
+        } else {
+            throw new IllegalArgumentException("wrong brand");
+        }
     }
 
     public String getModel() {
@@ -49,7 +60,11 @@ public class Car implements Comparable<Car> {
     }
 
     public void setModel(String model) {
-        this.model = model;
+        if (ParamValidator.isBetween(model.length(), 1, 15)) {
+            this.model = model;
+        } else {
+            throw new IllegalArgumentException("wrong model");
+        }
     }
 
     public int getEngineSize() {
@@ -57,7 +72,11 @@ public class Car implements Comparable<Car> {
     }
 
     public void setEngineSize(int engineSize) {
-        this.engineSize = engineSize;
+        if (ParamValidator.isBetween(engineSize, 700, 8000)) {
+            this.engineSize = engineSize;
+        } else {
+            throw new IllegalArgumentException("wrong engineSize");
+        }
     }
 
     @Override
@@ -69,6 +88,13 @@ public class Car implements Comparable<Car> {
     public boolean equals(Object obj) {
         return obj instanceof Car
                 && id == ((Car) obj).id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
     }
 
 }

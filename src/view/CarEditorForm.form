@@ -5,6 +5,7 @@
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="alwaysOnTop" type="boolean" value="true"/>
     <Property name="locationByPlatform" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -27,40 +28,36 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="lbBrand" max="32767" attributes="0"/>
                           <Component id="lbModel" max="32767" attributes="0"/>
-                          <Component id="lbEngineSize" max="32767" attributes="0"/>
-                          <Component id="lbLicencePlate" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
+                          <Component id="lbEngineSize" pref="119" max="32767" attributes="0"/>
+                          <Component id="lbLicencePlate" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="tfModel" min="-2" pref="124" max="-2" attributes="0"/>
-                              <Component id="tfEngineSize" min="-2" pref="124" max="-2" attributes="0"/>
-                              <Component id="tfBrand" min="-2" pref="124" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="tfLicencePlate" alignment="1" min="-2" pref="124" max="-2" attributes="0"/>
+                          <Component id="tfBrand" min="-2" pref="124" max="-2" attributes="0"/>
+                          <Component id="tfModel" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
+                          <Component id="tfEngineSize" min="-2" pref="124" max="-2" attributes="0"/>
+                          <Component id="tfLicencePlate" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="96" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Component id="btSave" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btExit" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                      <Component id="btCancel" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="51" max="32767" attributes="0"/>
+              <EmptySpace pref="25" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbLicencePlate" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfLicencePlate" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -80,10 +77,10 @@
                   <Component id="lbEngineSize" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfEngineSize" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="63" max="32767" attributes="0"/>
+              <EmptySpace pref="37" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btSave" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btExit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btCancel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
@@ -120,12 +117,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSaveActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btExit">
+    <Component class="javax.swing.JButton" name="btCancel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btExitActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCancelActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbLicencePlate">

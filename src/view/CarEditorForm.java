@@ -1,15 +1,16 @@
-package views;
+package view;
 
 import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 import logic.Car;
+import utils.StringFormatter;
 
 /**
  *
  * @author Marci
  */
-public class CarHandlerForm extends javax.swing.JDialog {
+public class CarEditorForm extends javax.swing.JDialog {
 
     private Car car;
     private List<CarEventListener> listeners;
@@ -19,25 +20,28 @@ public class CarHandlerForm extends javax.swing.JDialog {
      * Creates new form CarHandlerForm
      *
      * @param parent
+     * @param newId
      */
-    public CarHandlerForm(java.awt.Frame parent) {
+    public CarEditorForm(java.awt.Frame parent, long newId) {
         super(parent, true);
         initComponents();
         listeners = new ArrayList<>();
         car = new Car();
+        car.setId(newId);
+
     }
 
-    public CarHandlerForm(Frame frame, Car car) {
-        this(frame);
+    public CarEditorForm(Frame frame, Car car) {
+        this(frame, car.getId());
         this.car = car;
         fillFormFromCar();
     }
 
-    public void setcarHandlingStrategy(CarHandlingStrategy strategy) {
+    public void setCarHandlingStrategy(CarHandlingStrategy strategy) {
         this.strategy = strategy;
     }
 
-    public void addcarEventListener(CarEventListener l) {
+    public void addCarEventListener(CarEventListener l) {
         listeners.add(l);
     }
 
@@ -67,13 +71,14 @@ public class CarHandlerForm extends javax.swing.JDialog {
         lbModel = new javax.swing.JLabel();
         lbEngineSize = new javax.swing.JLabel();
         btSave = new javax.swing.JButton();
-        btExit = new javax.swing.JButton();
+        btCancel = new javax.swing.JButton();
         lbLicencePlate = new javax.swing.JLabel();
         tfLicencePlate = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setLocationByPlatform(true);
+        setResizable(false);
 
         lbBrand.setText("Brand");
 
@@ -88,10 +93,10 @@ public class CarHandlerForm extends javax.swing.JDialog {
             }
         });
 
-        btExit.setText("Cancel");
-        btExit.addActionListener(new java.awt.event.ActionListener() {
+        btCancel.setText("Cancel");
+        btCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btExitActionPerformed(evt);
+                btCancelActionPerformed(evt);
             }
         });
 
@@ -103,32 +108,29 @@ public class CarHandlerForm extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lbBrand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbModel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbEngineSize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbLicencePlate, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
+                            .addComponent(lbEngineSize, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(lbLicencePlate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfEngineSize, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(tfLicencePlate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(96, Short.MAX_VALUE))
+                            .addComponent(tfBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfEngineSize, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfLicencePlate, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
                         .addComponent(btSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btExit)
-                        .addGap(68, 68, 68))))
+                        .addComponent(btCancel)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbLicencePlate)
                     .addComponent(tfLicencePlate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -144,10 +146,10 @@ public class CarHandlerForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbEngineSize)
                     .addComponent(tfEngineSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btSave)
-                    .addComponent(btExit))
+                    .addComponent(btCancel))
                 .addGap(24, 24, 24))
         );
 
@@ -161,12 +163,12 @@ public class CarHandlerForm extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btSaveActionPerformed
 
-    private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
+    private void btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelActionPerformed
         this.dispose();
-    }//GEN-LAST:event_btExitActionPerformed
+    }//GEN-LAST:event_btCancelActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btExit;
+    private javax.swing.JButton btCancel;
     private javax.swing.JButton btSave;
     private javax.swing.JLabel lbBrand;
     private javax.swing.JLabel lbEngineSize;
@@ -179,18 +181,20 @@ public class CarHandlerForm extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void fillcarWithFormData() {
-        car.setLincencePlate(tfLicencePlate.getText());
-        car.setBrand(tfBrand.getText());
-        car.setModel(tfModel.getText());
+        car.setLicencePlate(tfLicencePlate.getText().
+                toUpperCase());
+        car.setBrand(StringFormatter.firstCharUpperRestLower(tfBrand.getText()));
+        car.setModel(StringFormatter.firstCharUpperRestLower(tfModel.getText()));
         car.setEngineSize(Integer.parseInt(tfEngineSize.getText()));
     }
 
     private void fillFormFromCar() {
-        tfLicencePlate.setText(car.getLincencePlate());
+        tfLicencePlate.setText(car.getLicencePlate());
         tfBrand.setText(car.getBrand());
         tfModel.setText(car.getModel());
         tfEngineSize.setText(String.valueOf(car.getEngineSize()));
         tfLicencePlate.requestFocus();
         tfLicencePlate.selectAll();
     }
+
 }

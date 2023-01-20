@@ -3,14 +3,14 @@ package logic;
 import java.util.List;
 import persistence.Controller;
 import persistence.ControllerFactory;
-import utils.CreatorType;
+import utils.ControllerType;
 
 public class CarHandler {
 
     private static final Controller CONTROLLER;
 
     static {
-        CONTROLLER = ControllerFactory.createController(CreatorType.CAR);
+        CONTROLLER = ControllerFactory.createController(ControllerType.CAR);
     }
 
     private CarHandler() {

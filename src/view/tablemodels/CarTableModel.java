@@ -1,8 +1,9 @@
-package views;
+package view.tablemodels;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import logic.Car;
+import utils.StringFormatter;
 
 public class CarTableModel extends AbstractTableModel {
 
@@ -33,13 +34,14 @@ public class CarTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Car temp = cars.get(rowIndex);
-        String value = temp.getLincencePlate();
+        String value = temp.getLicencePlate().
+                toUpperCase();
         switch (columnIndex) {
             case 1:
-                value = temp.getBrand();
+                value = StringFormatter.firstCharUpperRestLower(temp.getBrand());
                 break;
             case 2:
-                value = temp.getModel();
+                value = StringFormatter.firstCharUpperRestLower(temp.getModel());
                 break;
             case 3:
                 value = temp.getEngineSize() + " cm3";

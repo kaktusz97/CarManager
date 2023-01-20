@@ -3,6 +3,7 @@ package persistence;
 import java.util.ArrayList;
 import java.util.List;
 import logic.Car;
+import utils.StringFormatter;
 
 class CarController implements Controller {
 
@@ -30,9 +31,10 @@ class CarController implements Controller {
     private List<String> createListFromCar(Car c) {
         List<String> result = new ArrayList<>();
         result.add(String.valueOf(c.getId()));
-        result.add(c.getLincencePlate());
-        result.add(c.getBrand());
-        result.add(c.getModel());
+        result.add(c.getLicencePlate().
+                toUpperCase());
+        result.add(StringFormatter.firstCharUpperRestLower(c.getBrand()));
+        result.add(StringFormatter.firstCharUpperRestLower(c.getModel()));
         result.add(String.valueOf(c.getEngineSize()));
         return result;
     }
@@ -50,9 +52,10 @@ class CarController implements Controller {
 
     private Car createCarFromStringList(List<String> row) {
         long id = Long.parseLong(row.get(0));
-        String licencePlate = row.get(1);
-        String brand = row.get(2);
-        String type = row.get(3);
+        String licencePlate = row.get(1).
+                toUpperCase();
+        String brand = StringFormatter.firstCharUpperRestLower(row.get(2));
+        String type = StringFormatter.firstCharUpperRestLower(row.get(3));
         int engine = Integer.parseInt(row.get(4));
         return new Car(id, licencePlate, brand, type, engine);
     }
